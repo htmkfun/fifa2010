@@ -10,7 +10,7 @@ features.*
 db/*.sqlite3
 db/schema.rb
 config/database.yml
-config/deploy/config.rb
+config/deploy.rb
 .project
 public/assets
 public/test
