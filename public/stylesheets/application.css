@@ -1,0 +1,46 @@
+#koboard .ko_ht, #koboard .ko_at{
+  /*visibility:hidden;*/
+}
+
+#team-model{
+  display: none;
+}
+
+#groups{
+  
+}
+
+#groups .group h2{
+margin:0;
+padding:0;
+text-align:center;
+}
+
+#groups .group{
+border:1px solid;
+margin:2px;
+width:200px;
+}
+
+#groups .teamBox{
+border:1px solid #CCCCCC;
+list-style-image:none;
+list-style-position:outside;
+list-style-type:decimal;
+margin:2px;
+}
+
+#groupsBox{
+  float:left;
+  margin-left:40px;
+}
+
+#koboardBox{
+  float:left;
+  margin-left:40px;
+}
+
+
+#koboard .fteam.mouseover{
+  border: 1px solid #cccccc;
+}
