@@ -86,6 +86,7 @@ Fifa = (function(){
     self.initRoundof16();
     self.initQuarterFinals();
     self.initSemiFinals();
+    self.initKoboard();
   };
 
   self.initDatas = function(){
@@ -140,6 +141,12 @@ Fifa = (function(){
         $(this).removeClass('mouseover');
       });
 
+    });
+  };
+
+  self.initKoboard = function(){
+    $("#groups .group").each(function(){
+      self.updateKoboardBoxBygroupsBox($(this));
     });
   };
 
