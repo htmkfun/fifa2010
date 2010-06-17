@@ -59,7 +59,7 @@ Fifa = (function(){
       'ko_at59': ['ko_ht51', 'ko_at51'], // W51
       'ko_ht59': ['ko_ht52', 'ko_at52'], // W52
       'ko_ht57': ['ko_ht53', 'ko_at53'], // W53
-      'ko_at57': ['ko_ht53', 'ko_at53'], // W54
+      'ko_at57': ['ko_ht54', 'ko_at54'], // W54
       'ko_ht60': ['ko_ht55', 'ko_at55'], // W55
       'ko_at60': ['ko_ht56', 'ko_at56'] // W56
     },
@@ -128,7 +128,7 @@ Fifa = (function(){
         containment: 'parent',
         update: function(event, ui){
           // get rank
-          self.resetKoboardBoxBygroupsBox(ui.item.parents(".group"));
+          self.updateKoboardBoxBygroupsBox(ui.item.parents(".group"));
         },
         cursor: 'crosshair'
       });
@@ -146,12 +146,7 @@ Fifa = (function(){
   self.initRoundof16 = function(){
     $.each(self.KoboardMap['Roundof16'], function(team_key, r16){
       $("#"+r16).click(function(){
-        $.each(self.KoboardMap['Quarter-finals'], function(qf, r16s){
-          if(r16s.indexOf(r16) != -1){
-            self.setQuarterFinals($("#"+qf), $("#"+r16));
-          }
-        });
-        
+        self.setQuarterFinals(self.findQuarterFinals($(this)), $(this));
       });
     })
   };
@@ -159,11 +154,7 @@ Fifa = (function(){
   self.initQuarterFinals = function(){
     $.each(self.KoboardMap['Quarter-finals'], function(qf, r16s){
       $("#"+qf).click(function(){
-        $.each(self.KoboardMap['Semi-finals'], function(sf, qfs){
-          if(qfs.indexOf(qf) != -1){
-            self.setSemiFinals($("#"+sf), $("#"+qf));
-          }
-        });
+        self.setSemiFinals(self.findSemiFinals($(this)), $(this));
       });
     });
   };
@@ -180,7 +171,7 @@ Fifa = (function(){
     });
   };
 
-  self.resetKoboardBoxBygroupsBox = function(groupBox){
+  self.updateKoboardBoxBygroupsBox = function(groupBox){
     groupBox.find(".teamBox").each(function(i, teamBox){
 //      var groupNo = groupBox.attr('id').match(/groupBox([A-Z])/)[1];
       var groupNo = groupBox.data('groupNo');
@@ -192,21 +183,89 @@ Fifa = (function(){
     });
   };
 
-  self.setQuarterFinals = function(qt, r16){
-    qt.html(r16.text());
+  self.findQuarterFinals = function(r16){
+    var $qf;
+    $.each(self.KoboardMap['Quarter-finals'], function(qf, r16s){
+      if(r16s.indexOf(r16.attr('id')) != -1){
+        $qf = $("#"+qf);
+      }
+    });
+    return $qf;
   };
 
-  self.setSemiFinals = function(sf, qf){
-    sf.html(qf.text());
+  self.findSemiFinals = function(qf){
+    var $sf;
+    $.each(self.KoboardMap['Semi-finals'], function(sf, qfs){
+      if(qfs.indexOf(qf.attr('id')) != -1){
+        $sf = $("#"+sf);
+      }
+    });
+    return $sf;
   };
 
-  self.setFinals = function(f, sf){
-    f.html(sf.text());
+  self.findFinals = function(sf){
+    var $f;
+    $.each(self.KoboardMap['Finals'], function(f, sfs){
+      if(sfs.indexOf(sf.attr('id')) != -1){
+        $f = $("#"+f);
+      }
+    });
+    return $f;
   };
 
   self.setRoundof16 = function(r16, teamBox){
-   var teamData = teamBox.find('.team').data('team');
-   r16.html(teamData.name);
+    var teamData = teamBox.find('.team').data('team');
+    if(!r16.data('html')){
+      r16.data('html', r16.html());
+    }
+    r16.html(teamData.name);
+    self.setQuarterFinals(self.findQuarterFinals(r16));
+  };
+
+  self.setQuarterFinals = function(qf, r16){
+    if(r16){
+      var html = r16.html();
+      if(r16.data('html') && html != r16.data('html')){
+        if(!qf.data('html')){
+          qf.data('html', qf.html());
+        }
+        qf.html(html);
+      }
+    }else if(qf.data('html')){
+      qf.html(qf.data('html'));
+      self.setSemiFinals(self.findSemiFinals(qf));
+    }
+    
+  };
+
+  self.setSemiFinals = function(sf, qf){
+    if(qf){
+      var html = qf.html();
+      if(qf.data('html') && html != qf.data('html')){
+        if(!sf.data('html')){
+          sf.data('html', sf.html());
+        }
+        sf.html(html);
+      }
+    }else if(sf.data('html')){
+      sf.html(sf.data('html'));
+      self.setFinals(self.findFinals(sf));
+    }
+  };
+
+
+  self.setFinals = function(f, sf){
+    if(sf){
+      var html = sf.html();
+      if(sf.data('html') && html != sf.data('html')){
+        if(!f.data('html')){
+          f.data('html', f.html());
+        }
+        f.html(html);
+      }
+    }else if(f.data('html')){
+      f.html(f.data('html'));
+    }
   };
 
   // end of class definition
