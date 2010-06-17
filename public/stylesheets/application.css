@@ -19,7 +19,11 @@ text-align:center;
 #groups .group{
 border:1px solid;
 margin:2px;
-width:200px;
+width:160px;
+}
+
+#groups .group .teams{
+  margin:1px;
 }
 
 #groups .teamBox{
@@ -28,6 +32,8 @@ list-style-image:none;
 list-style-position:outside;
 list-style-type:decimal;
 margin:2px;
+font-size:11px;
+width: 100px;
 }
 
 #groupsBox{
