@@ -101,6 +101,11 @@ Fifa = (function(){
       }
     }
     self.teamGroups = teamGroups;
+    // demos
+    self.teamGroups['A'][0] = {name: "Uruguay", tag: "uru"};
+    self.teamGroups['A'][1] = {name: "Mexico", tag: "mex"};
+    self.teamGroups['A'][2] = {name: "South Africa", tag: "rsa"};
+    self.teamGroups['A'][3] = {name: "France", tag: "fra"};
   };
 
   self.initTeamGroups = function(){
@@ -119,7 +124,8 @@ Fifa = (function(){
         groupBox.find(".teams").html("");
         $.each(teams, function(i, team){
           var teamBox = $(teamBoxTpl).appendTo(groupBox.find(".teams"));
-          teamBox.find(".team").html(team.name);
+          var html = '<img src="/images/icons/flags/'+team.tag+'.gif">'+'<span class="name">'+team.name+'</span>';
+          teamBox.find(".team").html(html);
           teamBox.find(".team").data('team', team);
         });
       });
@@ -225,7 +231,7 @@ Fifa = (function(){
     if(!r16.data('html')){
       r16.data('html', r16.html());
     }
-    r16.html(teamData.name);
+    r16.html(teamBox.html()).find(".name").text(teamData.tag.toUpperCase());
     self.setQuarterFinals(self.findQuarterFinals(r16));
   };
 
