@@ -106,6 +106,42 @@ Fifa = (function(){
     self.teamGroups['A'][1] = {name: "Mexico", tag: "mex"};
     self.teamGroups['A'][2] = {name: "South Africa", tag: "rsa"};
     self.teamGroups['A'][3] = {name: "France", tag: "fra"};
+
+    self.teamGroups['B'][0] = {name: "Argentina", tag: "arg"};
+    self.teamGroups['B'][1] = {name: "Korea Republic", tag: "kor"};
+    self.teamGroups['B'][2] = {name: "Greece", tag: "gre"};
+    self.teamGroups['B'][3] = {name: "Nigeria", tag: "nga"};
+
+    self.teamGroups['C'][0] = {name: "USA", tag: "usa"};
+    self.teamGroups['C'][1] = {name: "England", tag: "eng"};
+    self.teamGroups['C'][2] = {name: "Slovenia", tag: "svn"};
+    self.teamGroups['C'][3] = {name: "Algeria", tag: "alg"};
+
+    self.teamGroups['D'][0] = {name: "Germany", tag: "ger"};
+    self.teamGroups['D'][1] = {name: "Ghana", tag: "gha"};
+    self.teamGroups['D'][2] = {name: "Australia", tag: "aus"};
+    self.teamGroups['D'][3] = {name: "Serbia", tag: "srb"};
+
+    self.teamGroups['E'][0] = {name: "Netherlands", tag: "ned"};
+    self.teamGroups['E'][1] = {name: "Japan", tag: "jpn"};
+    self.teamGroups['E'][2] = {name: "Australia", tag: "aus"};
+    self.teamGroups['E'][3] = {name: "Serbia", tag: "srb"};
+
+    self.teamGroups['F'][0] = {name: "Paraguay", tag: "par"};
+    self.teamGroups['F'][1] = {name: "Slovakia", tag: "svk"};
+    self.teamGroups['F'][2] = {name: "New Zealand", tag: "nzl"};
+    self.teamGroups['F'][3] = {name: "Italy", tag: "ita"};
+
+    self.teamGroups['G'][0] = {name: "Brazil", tag: "bra"};
+    self.teamGroups['G'][1] = {name: "Portugal", tag: "por"};
+    self.teamGroups['G'][2] = {name: "Côte d'Ivoire", tag: "civ"};
+    self.teamGroups['G'][3] = {name: "Korea DPR", tag: "prk"};
+
+    self.teamGroups['H'][0] = {name: "Chile", tag: "chi"};
+    self.teamGroups['H'][1] = {name: "Spain", tag: "esp"};
+    self.teamGroups['H'][2] = {name: "Switzerland", tag: "sui"};
+    self.teamGroups['H'][3] = {name: "Honduras", tag: "hon"};
+
   };
 
   self.initTeamGroups = function(){
@@ -124,8 +160,8 @@ Fifa = (function(){
         groupBox.find(".teams").html("");
         $.each(teams, function(i, team){
           var teamBox = $(teamBoxTpl).appendTo(groupBox.find(".teams"));
-          var html = '<img src="/images/icons/flags/'+team.tag+'.gif">'+'<span class="name">'+team.name+'</span>';
-          teamBox.find(".team").html(html);
+          var html = '<img src="http://img.fifa.com/imgml/flags/s/'+team.tag+'.gif">'+'<span class="name">'+team.name+'</span>';
+          teamBox.find(".team").html(html).attr('title', team.name);
           teamBox.find(".team").data('team', team);
         });
       });
