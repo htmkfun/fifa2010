@@ -73,7 +73,8 @@ Fifa = (function(){
       'ko_ht64': ['ko_ht61', 'ko_at61'], // W61
       'ko_at64': ['ko_ht62', 'ko_at62'] // W62
     },
-    'Champin': {
+    'Champion': {
+      'ko_res64': ['ko_ht64', 'ko_at64'] // w64
     }
   };
 
@@ -86,6 +87,7 @@ Fifa = (function(){
     self.initRoundof16();
     self.initQuarterFinals();
     self.initSemiFinals();
+    self.initFinals();
     self.initKoboard();
   };
 
@@ -220,6 +222,18 @@ Fifa = (function(){
     });
   };
 
+  self.initFinals = function(){
+    $.each(self.KoboardMap['Finals'], function(f, sfs){
+      $("#"+f).click(function(){
+        $.each(self.KoboardMap['Champion'], function(c, fs){
+          if(fs.indexOf(f) != -1){
+            self.setChampion($("#"+c), $("#"+f));
+          }
+        });
+      });
+    });
+  };
+
   self.updateKoboardBoxBygroupsBox = function(groupBox){
     groupBox.find(".teamBox").each(function(i, teamBox){
 //      var groupNo = groupBox.attr('id').match(/groupBox([A-Z])/)[1];
@@ -314,6 +328,20 @@ Fifa = (function(){
       }
     }else if(f.data('html')){
       f.html(f.data('html'));
+    }
+  };
+
+  self.setChampion = function(c, f){
+    if(f){
+      var html = f.html();
+      if(f.data('html') && html != f.data('html')){
+        if(!c.data('html')){
+          c.data('html', c.html());
+        }
+        c.html(html);
+      }
+    }else if(c.data('html')){
+      c.html(c.data('html'));
     }
   };
 
