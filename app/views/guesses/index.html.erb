@@ -1,0 +1,24 @@
+<h1>Listing guesses</h1>
+
+<table>
+  <tr>
+    <th>name</th>
+    <th>result</th>
+    <th>short url</th>
+  </tr>
+
+<% @guesses.each do |guess| %>
+  <tr>
+    <td><%= guess.name %></td>
+    <td><%= guess.result %></td>
+    <td><%= guess.short_url %></td>
+    <td><%= link_to 'Show', guess %></td>
+    <td><%= link_to 'Edit', edit_guess_path(guess) %></td>
+    <td><%= link_to 'Destroy', guess, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New guess', new_guess_path %>

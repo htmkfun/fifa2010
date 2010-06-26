@@ -1,0 +1,16 @@
+<% form_for @guess do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :result %><br />
+    <%= f.text_area :result %>
+  </p>
+  <p>
+    <%= f.label :short_url %><br />
+    <%= f.text_area :short_url %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

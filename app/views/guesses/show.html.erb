@@ -1,0 +1,24 @@
+<p>
+  <strong>Name:</strong>
+  <%=h @guess.name %>
+</p>
+<p>
+  <strong>Result:</strong>
+  <%=h @guess.result %>
+</p>
+<p>
+  <strong>Short url:</strong>
+  <br/>
+  <%= @guess.short_url %>
+</p>
+
+<p>
+  
+  <%= link_to 'Edit', edit_guess_path(@guess) %> |
+  <%= link_to "Destroy", @guess, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to 'View All', guesses_path %>
+</p>
+
+
+
+
