@@ -1,275 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
-      
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
-      
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
-      
-      
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
-      
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>FIFA.com - The matches of 2010 FIFA World Cup South Africa</title>
+    <!--<link href="http://www.fifa.com/components/style/koboard/worldcup.css" rel="stylesheet" title="standard" type="text/css"/>-->
 
-      #footer {
-        clear: both;
-      }
-      
+    <link href="/stylesheets/worldcup.css" rel="stylesheet" title="standard" type="text/css"/>
+    <link href="/stylesheets/application.css" rel="stylesheet" title="standard" type="text/css"/>
 
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/javascripts/jquery/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>-->
+    <script type="text/javascript" src="javascripts/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
 
-
-      #header {
-        background-image: url("images/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-      
-      
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-      
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -11px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-      
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
-      
-      
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
-      
-      
-      #search {
-        margin: 0;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 11px;
-      }
-      #search input {
-        font-size: 11px;
-        margin: 2px;
-      }
-      #search-text {width: 170px}
-      
-      
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-      
-    </style>
-    <script type="text/javascript" src="javascripts/prototype.js"></script>
-    <script type="text/javascript" src="javascripts/effects.js"></script>
-    <script type="text/javascript">
-      function about() {
-        if (Element.empty('about-content')) {
-          new Ajax.Updater('about-content', 'rails/info/properties', {
-            method:     'get',
-            onFailure:  function() {Element.classNames('about-content').add('failure')},
-            onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
-          });
-        } else {
-          new Effect[Element.visible('about-content') ? 
-            'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
-        }
-      }
-      
-      window.onload = function() {
-        $('search-text').value = '';
-        $('search').onsubmit = function() {
-          $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
-        }
-      }
-    </script>
   </head>
   <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <form id="search" action="http://www.google.com/search" method="get">
-              <input type="hidden" name="hl" value="en" />
-              <input type="text" id="search-text" name="q" value="site:rubyonrails.org " />
-              <input type="submit" value="Search" /> the Rails site
-            </form>
-          </li>
-        
-          <li>
-            <h3>Join the community</h3>
-            <ul class="links">
-              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
-              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
-              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
+    <div id="groupsBox">
+      <div id="groups">
+        <div id="team-model">
+          <div class="group">
+            <h2>Group No</h2>
+            <ul class="teams">
+              <li class="teamBox"><span class="team">Team Name</span></li>
             </ul>
-          </li>
-          
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-        
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-          
-          <ol>          
-            <li>
-              <h2>Use <tt>script/generate</tt> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-            
-            <li>
-              <h2>Set up a default route and remove or rename this file</h2>
-              <p>Routes are set up in config/routes.rb.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <tt>rake db:migrate</tt> to create your database. If you're not using SQLite (the default), edit <tt>config/database.yml</tt> with your username and password.</p>
-            </li>
-          </ol>
+          </div>
         </div>
       </div>
-      
-      <div id="footer">&nbsp;</div>
+    </div>
+    <div id="koboardBox">
+      <div id="koboard"> <div class="h"> <h4 class="h_r1">Round of 16</h4><h4 class="h_r2">Quarter-finals</h4><h4 class="h_r3">Semi-finals</h4><h4 class="h_r4">Final</h4><h4 class="h_r5">Semi-finals</h4><h4 class="h_r6">Quarter-finals</h4><h4 class="h_r7">Round of 16</h4></div><div class="ikob"> <div id="ko_m49" class="rc78"><div id="ko_ht49" class="fteam ko_ht ko_team">1A</div><div id="ko_res49" class="ko_fixture ko_result"><span>[49] 26/06</span></div><div id="ko_at49" class="fteam ko_at ko_team">2B</div></div><div id="ko_m50" class="rc78"><div id="ko_ht50" class="fteam ko_ht ko_team">1C</div><div id="ko_res50" class="ko_fixture ko_result"><span>[50] 26/06</span></div><div id="ko_at50" class="fteam ko_at ko_team">2D</div></div><div id="ko_m51" class="rc78"><div id="ko_ht51" class="fteam ko_ht ko_team">1D</div><div id="ko_res51" class="ko_fixture ko_result"><span>[51] 27/06</span></div><div id="ko_at51" class="fteam ko_at ko_team">2C</div></div><div id="ko_m52" class="rc78"><div id="ko_ht52" class="fteam ko_ht ko_team">1B</div><div id="ko_res52" class="ko_fixture ko_result"><span>[52] 27/06</span></div><div id="ko_at52" class="fteam ko_at ko_team">2A</div></div><div id="ko_m53" class="rc78"><div id="ko_ht53" class="fteam ko_ht ko_team">1E</div><div id="ko_res53" class="ko_fixture ko_result"><span>[53] 28/06</span></div><div id="ko_at53" class="fteam ko_at ko_team">2F</div></div><div id="ko_m54" class="rc78"><div id="ko_ht54" class="fteam ko_ht ko_team">1G</div><div id="ko_res54" class="ko_fixture ko_result"><span>[54] 28/06</span></div><div id="ko_at54" class="fteam ko_at ko_team">2H</div></div><div id="ko_m55" class="rc78"><div id="ko_ht55" class="fteam ko_ht ko_team">1F</div><div id="ko_res55" class="ko_fixture ko_result"><span>[55] 29/06</span></div><div id="ko_at55" class="fteam ko_at ko_team">2E</div></div><div id="ko_m56" class="rc78"><div id="ko_ht56" class="fteam ko_ht ko_team">1H</div><div id="ko_res56" class="ko_fixture ko_result"><span>[56] 29/06</span></div><div id="ko_at56" class="fteam ko_at ko_team">2G</div></div><div id="ko_m57" class="rc74"><div id="ko_ht57" class="fteam ko_ht ko_team">W53</div><div id="ko_res57" class="ko_fixture ko_result"><span>[57] 02/07</span></div><div id="ko_at57" class="fteam ko_at ko_team">W54</div></div><div id="ko_m58" class="rc74"><div id="ko_ht58" class="fteam ko_ht ko_team">W49</div><div id="ko_res58" class="ko_fixture ko_result"><span>[58] 02/07</span></div><div id="ko_at58" class="fteam ko_at ko_team">W50</div></div><div id="ko_m59" class="rc74"><div id="ko_ht59" class="fteam ko_ht ko_team">W52</div><div id="ko_res59" class="ko_fixture ko_result"><span>[59] 03/07</span></div><div id="ko_at59" class="fteam ko_at ko_team">W51</div></div><div id="ko_m60" class="rc74"><div id="ko_ht60" class="fteam ko_ht ko_team">W55</div><div id="ko_res60" class="ko_fixture ko_result"><span>[60] 03/07</span></div><div id="ko_at60" class="fteam ko_at ko_team">W56</div></div><div id="ko_m61" class="rc75"><div id="ko_ht61" class="fteam ko_ht ko_team">W58</div><div id="ko_res61" class="ko_fixture ko_result"><span>[61] 06/07</span></div><div id="ko_at61" class="fteam ko_at ko_team">W57</div></div><div id="ko_m62" class="rc75"><div id="ko_ht62" class="fteam ko_ht ko_team">W59</div><div id="ko_res62" class="ko_fixture ko_result"><span>[62] 07/07</span></div><div id="ko_at62" class="fteam ko_at ko_team">W60</div></div><div id="ko_m63" class="rc76"><div id="ko_ht63" class="fteam ko_ht ko_team">L61</div><div id="ko_res63" class="ko_fixture ko_result"><span>[63] 10/07</span></div><div id="ko_at63" class="fteam ko_at ko_team">L62</div></div><div id="ko_m64" class="rc6"><div id="ko_ht64" class="fteam ko_ht ko_team">W61</div><div id="ko_res64" class="ko_fixture ko_result"><span>[64] 11/07</span></div><div id="ko_at64" class="fteam ko_at ko_team">W62</div></div></div><div class="f"> </div></div>
     </div>
   </body>
 </html>
