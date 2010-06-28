@@ -1,9 +1,10 @@
 class GuessesController < ApplicationController
   # GET /guesses
   # GET /guesses.xml
+  
   def index
-    @guesses = Guess.all
-
+    @guess = Guess.new
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @guesses }
@@ -33,9 +34,9 @@ class GuessesController < ApplicationController
   end
 
   # GET /guesses/1/edit
-  def edit
-    @guess = Guess.find(params[:id])
-  end
+  # def edit
+  #   @guess = Guess.find(params[:id])
+  # end
 
   # POST /guesses
   # POST /guesses.xml
@@ -56,30 +57,30 @@ class GuessesController < ApplicationController
 
   # PUT /guesses/1
   # PUT /guesses/1.xml
-  def update
-    @guess = Guess.find(params[:id])
-
-    respond_to do |format|
-      if @guess.update_attributes(params[:guess])
-        flash[:notice] = 'Guess was successfully updated.'
-        format.html { redirect_to(@guess) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @guess.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   @guess = Guess.find(params[:id])
+  # 
+  #   respond_to do |format|
+  #     if @guess.update_attributes(params[:guess])
+  #       flash[:notice] = 'Guess was successfully updated.'
+  #       format.html { redirect_to(@guess) }
+  #       format.xml  { head :ok }
+  #     else
+  #       format.html { render :action => "edit" }
+  #       format.xml  { render :xml => @guess.errors, :status => :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /guesses/1
   # DELETE /guesses/1.xml
-  def destroy
-    @guess = Guess.find(params[:id])
-    @guess.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(guesses_url) }
-      format.xml  { head :ok }
-    end
-  end
+  # def destroy
+  #   @guess = Guess.find(params[:id])
+  #   @guess.destroy
+  # 
+  #   respond_to do |format|
+  #     format.html { redirect_to(guesses_url) }
+  #     format.xml  { head :ok }
+  #   end
+  # end
 end

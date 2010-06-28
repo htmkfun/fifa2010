@@ -89,6 +89,7 @@ Fifa = (function(){
     self.initSemiFinals();
     self.initFinals();
     self.initKoboard();
+		self.initButtons();
   };
 
   self.initDatas = function(){
@@ -234,6 +235,16 @@ Fifa = (function(){
     });
   };
 
+	self.initButtons = function(){
+		$(".save-guess").click(function(){
+			$("#form").slideDown('slow');
+		});
+	};
+	
+	self.generateResult = function(){
+		
+	};
+	
   self.updateKoboardBoxBygroupsBox = function(groupBox){
     groupBox.find(".teamBox").each(function(i, teamBox){
 //      var groupNo = groupBox.attr('id').match(/groupBox([A-Z])/)[1];

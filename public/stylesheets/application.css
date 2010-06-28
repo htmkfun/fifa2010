@@ -53,3 +53,15 @@ width: 120px;
 #koboard .fteam.mouseover{
   border: 1px solid #cccccc;
 }
+
+#clear{
+	clear:both;
+}
+
+#save-guess{
+	float:left;
+}
+
+#form{
+	display:none;
+}

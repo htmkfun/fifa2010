@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>FIFA.com - The matches of 2010 FIFA World Cup South Africa</title>
+    <!--<link href="http://www.fifa.com/components/style/koboard/worldcup.css" rel="stylesheet" title="standard" type="text/css"/>-->
+
+    <link href="/stylesheets/worldcup.css" rel="stylesheet" title="standard" type="text/css"/>
+    <link href="/stylesheets/application.css" rel="stylesheet" title="standard" type="text/css"/>
+
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/javascripts/jquery/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>-->
+    <script type="text/javascript" src="javascripts/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+  </head>
+  <body>
+    <div id="groupsBox">
+      <div id="groups">
+        <div id="team-model">
+          <div class="group">
+            <h2>Group No</h2>
+            <ul class="teams">
+              <li class="teamBox"><span class="team">Team Name</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= yield %>
+    
+  </body>
+</html>
