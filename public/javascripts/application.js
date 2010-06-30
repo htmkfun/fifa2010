@@ -22,7 +22,7 @@ Fifa = (function(){
 
     // instance constructor
     function constructor(){
-      
+
     }
 
     // end of instance definition
@@ -73,6 +73,13 @@ Fifa = (function(){
       'ko_ht64': ['ko_ht61', 'ko_at61'], // W61
       'ko_at64': ['ko_ht62', 'ko_at62'] // W62
     },
+    'Finals-lost': {
+      'ko_ht63': ['ko_ht61', 'ko_at61'], // L61
+      'ko_at63': ['ko_ht62', 'ko_at62'], // L62
+    },
+    'Second-place': {
+      'ko_res63': ['ko_ht63', 'ko_at63'] // W63
+    },
     'Champion': {
       'ko_res64': ['ko_ht64', 'ko_at64'] // w64
     }
@@ -80,7 +87,7 @@ Fifa = (function(){
 
   // class public methods
   // self.bar = function(){ return self.foo };
-  
+
   self.init = function(){
     self.initDatas();
     self.initTeamGroups();
@@ -88,6 +95,7 @@ Fifa = (function(){
     self.initQuarterFinals();
     self.initSemiFinals();
     self.initFinals();
+    self.initFinalsLost();
     self.initKoboard();
 		self.initButtons();
   };
@@ -217,6 +225,16 @@ Fifa = (function(){
         $.each(self.KoboardMap['Finals'], function(f, sfs){
           if(sfs.indexOf(sf) != -1){
             self.setFinals($("#"+f), $("#"+sf));
+            // set finals lost
+            $.each(sfs, function(i, _sf){
+              if(sf != _sf){
+                $.each(self.KoboardMap['Finals-lost'], function(fl, sfs){
+                  if(sfs.indexOf(_sf) != -1){
+                    self.getPromotion($("#"+_sf), $("#"+fl));
+                  }
+                });
+              }
+            });
           }
         });
       });
@@ -235,16 +253,28 @@ Fifa = (function(){
     });
   };
 
+  self.initFinalsLost = function(){
+    $.each(self.KoboardMap['Finals-lost'], function(f, sfs){
+      $("#"+f).click(function(){
+        $.each(self.KoboardMap['Second-place'], function(c, fs){
+          if(fs.indexOf(f) != -1){
+            self.getPromotion($("#"+f), $("#"+c));
+          }
+        });
+      });
+    });
+  };
+
 	self.initButtons = function(){
 		$(".save-guess").click(function(){
 			$("#form").slideDown('slow');
 		});
 	};
-	
+
 	self.generateResult = function(){
-		
+
 	};
-	
+
   self.updateKoboardBoxBygroupsBox = function(groupBox){
     groupBox.find(".teamBox").each(function(i, teamBox){
 //      var groupNo = groupBox.attr('id').match(/groupBox([A-Z])/)[1];
@@ -287,6 +317,20 @@ Fifa = (function(){
     return $f;
   };
 
+self.getPromotion = function(current, next){
+    if(current){
+      var html = current.html();
+      if(current.data('html') && html != current.data('html')){
+        if(!next.data('html')){
+          next.data('html', next.html());
+        }
+        next.html(html);
+      }
+    }else if(next.data('html')){
+      next.html(next.data('html'));
+    }
+  };
+
   self.setRoundof16 = function(r16, teamBox){
     var teamData = teamBox.find('.team').data('team');
     if(!r16.data('html')){
@@ -309,7 +353,7 @@ Fifa = (function(){
       qf.html(qf.data('html'));
       self.setSemiFinals(self.findSemiFinals(qf));
     }
-    
+
   };
 
   self.setSemiFinals = function(sf, qf){
