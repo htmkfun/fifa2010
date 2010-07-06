@@ -85,6 +85,8 @@ Fifa = (function(){
     }
   };
 
+  self.results = {};
+
   // class public methods
   // self.bar = function(){ return self.foo };
 
@@ -97,6 +99,7 @@ Fifa = (function(){
     self.initFinals();
     self.initFinalsLost();
     self.initKoboard();
+    self.initKoboardData();
 		self.initButtons();
   };
 
@@ -108,7 +111,7 @@ Fifa = (function(){
       var groupNo = String.fromCharCode(i);
       teamGroups[groupNo] = [];
       for(var j=1;j<=4;j++){
-        teamGroups[groupNo].push( {name:("Group "+groupNo+" Team "+j), tag: ("g_"+groupNo+"_t_"+j)} );
+        teamGroups[groupNo].push( {group:groupNo, name:("Group "+groupNo+" Team "+j), tag: ("g_"+groupNo+"_t_"+j)} );
       }
     }
     self.teamGroups = teamGroups;
@@ -152,6 +155,14 @@ Fifa = (function(){
     self.teamGroups['H'][1] = {name: "Spain", tag: "esp"};
     self.teamGroups['H'][2] = {name: "Switzerland", tag: "sui"};
     self.teamGroups['H'][3] = {name: "Honduras", tag: "hon"};
+
+    // set group no
+    $.each(self.teamGroups, function(groupNo, teams){
+      $.each(teams, function(i, teamData){
+        teamData['group'] = groupNo;
+      })
+    });
+
 
   };
 
@@ -201,6 +212,22 @@ Fifa = (function(){
     $("#groups .group").each(function(){
       self.updateKoboardBoxBygroupsBox($(this));
     });
+  };
+
+  self.initKoboardData = function(){
+    var guess_result = $("#guess_result").val();
+    if(guess_result != ""){
+      guess_result = $.parseJSON(guess_result);
+      if(guess_result){
+        $.each(guess_result, function(item_id, team_key){
+          if(team_key){
+            var teamData = self.findTeam(team_key);
+            var team = self.getTeamUI(team_key);
+            $("#"+item_id).html(team.clone());
+          }
+        });
+      }
+    }
   };
 
   self.initRoundof16 = function(){
@@ -266,14 +293,51 @@ Fifa = (function(){
   };
 
 	self.initButtons = function(){
-		$(".save-guess").click(function(){
+    $(".save-guess").click(function(){
 			$("#form").slideDown('slow');
 		});
+
+    $("#submit").click(function(event){
+      var result = self.generateResult();
+      result = $.toJSON(result);
+      $("#guess_result").val(result);
+    });
 	};
 
 	self.generateResult = function(){
-
+    $(".fteam").each(function(i, team){
+      var teamData = self.findTeam(team);
+      var tag = teamData ? teamData.tag : '';
+      self.results[$(team).attr('id')] = tag;
+    });
+    return self.results;
 	};
+
+  self.findTeam = function(team, getTeam){
+    var key = "";
+    if(typeof team == 'string'){
+      key = team;
+    }else{
+      key = $(team).find(".name").text().toLowerCase();
+    }
+    
+    var found;
+    $.each(self.teamGroups, function(groupNo, teams){
+      if(!found){
+        found = $.grep(teams, function(team, i){
+          return team.tag  == key;
+        });
+        if(!found[0]){
+          found = false;
+        }
+      }else{
+        return found;
+      }
+    });
+    if(found){
+      return found[0];
+    }
+  };
 
   self.updateKoboardBoxBygroupsBox = function(groupBox){
     groupBox.find(".teamBox").each(function(i, teamBox){
@@ -328,6 +392,24 @@ self.getPromotion = function(current, next){
       }
     }else if(next.data('html')){
       next.html(next.data('html'));
+    }
+  };
+
+  // get the first team box ui object within groups box
+  self.getTeamBox = function(team_key){
+    teamData = self.findTeam(team_key);
+    var team = $("#groups .teamBox .team[title="+teamData.name+"]:first");
+    if(team.get(0)){
+      return team.parents(".teamBox");
+    }
+  };
+
+  // get the first team ui object within koboard
+  self.getTeamUI = function(team_key){
+    teamData = self.findTeam(team_key);
+    var team = $("#koboard .fteam .team[title="+teamData.name+"]:first");
+    if(team.get(0)){
+      return team;
     }
   };
 

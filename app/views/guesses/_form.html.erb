@@ -1,16 +1,16 @@
-<% form_for @guess do |f| %>
+<% form_for @guess, :html => {:autocomplete => 'off'} do |f| %>
   <%= f.error_messages %>
-  <p>
+  <div>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </p>
-  <p>
+  </div>
+  <div class="hidden">
     <%= f.label :result %><br />
     <%= f.text_area :result %>
-  </p>
-  <p>
+  </div>
+  <div class="hidden">
     <%= f.label :short_url %><br />
     <%= f.text_field :short_url %>
-  </p>
-  <p><%= image_submit_tag 'submit.png' %></p>
+  </div>
+  <div><%= image_submit_tag 'submit.png', :id => "submit" %></div>
 <% end %>

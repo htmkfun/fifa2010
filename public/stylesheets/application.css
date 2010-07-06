@@ -65,3 +65,7 @@ width: 120px;
 #form{
 	display:none;
 }
+
+.hidden{
+  display: none;
+}
